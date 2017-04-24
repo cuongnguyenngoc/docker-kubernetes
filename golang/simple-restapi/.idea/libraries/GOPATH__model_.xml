@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;model&gt;">
+    <CLASSES>
+      <root url="file:///usr/lib/go/src/cmd" />
+      <root url="file:///usr/lib/go/src/libmach" />
+      <root url="file:///usr/lib/go/src/pkg" />
+      <root url="file:///usr/lib/go/src/libbio" />
+      <root url="file:///usr/lib/go/src/lib9" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file:///usr/lib/go/src/cmd" />
+      <root url="file:///usr/lib/go/src/libmach" />
+      <root url="file:///usr/lib/go/src/pkg" />
+      <root url="file:///usr/lib/go/src/libbio" />
+      <root url="file:///usr/lib/go/src/lib9" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$/model" />
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>

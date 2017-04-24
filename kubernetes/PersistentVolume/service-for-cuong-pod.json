@@ -1,0 +1,19 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "cuong-service"
+  },
+  "spec": {
+    "ports": [
+      {
+        "protocol": "TCP",
+        "port": 2000,
+        "targetPort": "http-server"
+      }
+    ],
+    "selector": {
+      "name": "frontendhttp"
+    }
+  }
+}

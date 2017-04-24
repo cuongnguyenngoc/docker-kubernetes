@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis-slave
+  labels:
+    name: redis-slave
+spec:
+  selector:
+    name: redis-slave
+  ports:
+    - port: 6379

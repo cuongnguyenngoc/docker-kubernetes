@@ -1,0 +1,21 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: cuong-pod
+  labels:
+    name: frontendhttp
+spec:
+  volumes:
+    - name: cuong-storage
+      persistentVolumeClaim:
+        claimName: cuong-claim
+
+  containers:
+    - name: cuong-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: cuong-storage

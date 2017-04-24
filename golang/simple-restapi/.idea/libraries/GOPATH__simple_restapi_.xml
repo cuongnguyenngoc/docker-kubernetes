@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;simple-restapi&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../Golang/SimpleRestfulAPI/src/github.com" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../Golang/SimpleRestfulAPI/src/github.com" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
