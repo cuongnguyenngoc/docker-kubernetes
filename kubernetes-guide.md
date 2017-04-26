@@ -1,85 +1,85 @@
 I. Kubernetes basic
-  1. Configuration & install kubernetes on Local machine (Ubuntu)
-    * Create a Minikube cluster. Minikube is a tool to run Kubernetes locally. Minibuke create a single node Kubernetes cluster in VM on Local machine like using Virtualbox
-    ```
+1. Configuration & install kubernetes on Local machine (Ubuntu)
+* Create a Minikube cluster. Minikube is a tool to run Kubernetes locally. Minibuke create a single node Kubernetes cluster in VM on Local machine like using Virtualbox
+```bash
     curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.15.0/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
-    ```
-    Run ```minikube version``` to check whether it was installed successfully.
-    * Intall Kubectl
-    ```
-    wget https://storage.googleapis.com/kubernetes-release/release/v1.4.4/bin/linux/amd64/kubectl
-    chmod +x kubectl
-    sudo mv kubectl /usr/local/bin/kubectl
-    ```
-    * Ok. We are done with installing of Minikube and kubectl. So first of all, start minikube and config kubectl to be able to interact with minikube (cluster) by these following commands. 
-    ```minikube start``` - this will create a virtual machine by using virtual box. 
-    ```kubectl config use-context minikube``` - to set the Minikube context. The context is what determines which cluster kubectl is interacting with
-    ```kubectl cluster-info``` - to verify that kubectl is configured to communicate with the cluster.
-  2. Kubectl commands
-    * To view nodes in cluster
-    ```kubectl get nodes```
-    * To create a deployment
-    ```
-    kubectl run deployment_name --image=docker_image --port=port
-    ```
-    * To see list of deployments
-    ```kubectl get deployments```
-    * To view list of pods
-    ```kubectl get pods```
-    * To view what containers are inside those pods and what images are used to build those containers
-    ```kubectl describe pods``` or ```kubectl describe pod specific_pod_name```
-    * To view the container logs
-    ```kubectl logs pod_name```
-    * To excute command on the container
-    ```kubectl exec -ti pod_name /bin/bash``` - you can get inside container by this.
-    * To create a service so that the app can be accessed from outside of cluster
-    ```
-    kubectl expose deployment/deployment_name --type=type --port port
-    ```
-    type: could be NodePort, LoadBalancer
-    port: is a port of container in pod.
-    * To see list services - we can see the service received an unique cluster-IP, an internal port and external-IP (an IP of the Node)
-    ```kubectl get services```
-    * To find out what port was opened externally (by the NodePort option) we'll run
-    ```
-    kubectl describe services/service_name
-    ```
-    * Using ```curl``` to test the app is exposed outside of the cluster
-    ```curl ip_of_node:node_port```
-    * Using labels
-      * To see the name of label of pod
-      ```kubectl describe deployment```
-      * To query list of pods using label
-      ```kubectl get pods -l run=label_name```
-      * To query list of services using label
-      ```kubectl get services -l run=label_name```
-      * To update label of pod
-      ```kubectl label pod pod_name new_label_name```
-    * To delete a service
-    ```kubectl delete service -l run=label_name```
-    * To scale a deployment
-      * To scale a deployment
-      ```kubectl scale deployments/deployment_name --replicas=number_instances_wanted_to_scale_to```
-      * To see number of pods after scaling
-      ```kubectl get pods -o wide```
-      * To check the service is load-balancing the traffic, we use ```curl ip_of_node:port_of_node```. This will hit a difference pod with every request.
-      * To scale down
-      ```
-      kubectl scale deployments/kubernetes-bootcamp --replicas=number_instances_wanted_to_scale_to
-      ```
-      Check list of pods after scaling down ```kubectl get pods -o wide```. this confirms that 2 pods were terminated
-    * To update the version of the app
-      * Update the image of the application to another version
-      ```
-      kubectl set image deployments/deployment_name=docker_image:newversion
-      ```
-      * Check the status of a rolling update, we will see the old one is terminating
-      ```kubectl get pods```
-      * To verify an update, we use ```curl ip_node:port_node```
-      * To see the version of current docker image
-      ```kubectl describe pods```
-      * Rollback an update ( this is for when update got error, we can rollback to previous version)
-      ```kubectl rollout undo deployments/deployment_name```
+```
+Run ```minikube version``` to check whether it was installed successfully.
+* Intall Kubectl
+```bash
+wget https://storage.googleapis.com/kubernetes-release/release/v1.4.4/bin/linux/amd64/kubectl
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/kubectl
+```
+* Ok. We are done with installing of Minikube and kubectl. So first of all, start minikube and config kubectl to be able to interact with minikube (cluster) by these following commands. 
+```minikube start``` - this will create a virtual machine by using virtual box. 
+```kubectl config use-context minikube``` - to set the Minikube context. The context is what determines which cluster kubectl is interacting with
+```kubectl cluster-info``` - to verify that kubectl is configured to communicate with the cluster.
+2. Kubectl commands
+* To view nodes in cluster
+```kubectl get nodes```
+* To create a deployment
+```bash
+kubectl run deployment_name --image=docker_image --port=port
+```
+* To see list of deployments
+```kubectl get deployments```
+* To view list of pods
+```kubectl get pods```
+* To view what containers are inside those pods and what images are used to build those containers
+```kubectl describe pods``` or ```kubectl describe pod specific_pod_name```
+* To view the container logs
+```kubectl logs pod_name```
+* To excute command on the container
+```kubectl exec -ti pod_name /bin/bash``` - you can get inside container by this.
+* To create a service so that the app can be accessed from outside of cluster
+```bash
+kubectl expose deployment/deployment_name --type=type --port port
+```
+type: could be NodePort, LoadBalancer
+port: is a port of container in pod.
+* To see list services - we can see the service received an unique cluster-IP, an internal port and external-IP (an IP of the Node)
+```kubectl get services```
+* To find out what port was opened externally (by the NodePort option) we'll run
+```
+kubectl describe services/service_name
+```
+* Using ```curl``` to test the app is exposed outside of the cluster
+```curl ip_of_node:node_port```
+* Using labels
+** To see the name of label of pod
+```kubectl describe deployment```
+** To query list of pods using label
+```kubectl get pods -l run=label_name```
+** To query list of services using label
+```kubectl get services -l run=label_name```
+** To update label of pod
+```kubectl label pod pod_name new_label_name```
+** To delete a service
+```kubectl delete service -l run=label_name```
+** To scale a deployment
+*** To scale a deployment
+```kubectl scale deployments/deployment_name --replicas=number_instances_wanted_to_scale_to```
+*** To see number of pods after scaling
+```kubectl get pods -o wide```
+*** To check the service is load-balancing the traffic, we use ```curl ip_of_node:port_of_node```. This will hit a difference pod with every request.
+*** To scale down
+```bash
+kubectl scale deployments/kubernetes-bootcamp --replicas=number_instances_wanted_to_scale_to
+```
+Check list of pods after scaling down ```kubectl get pods -o wide```. this confirms that 2 pods were terminated
+* To update the version of the app
+  * Update the image of the application to another version
+  ```
+  kubectl set image deployments/deployment_name=docker_image:newversion
+  ```
+  * Check the status of a rolling update, we will see the old one is terminating
+  ```kubectl get pods```
+  * To verify an update, we use ```curl ip_node:port_node```
+  * To see the version of current docker image
+  ```kubectl describe pods```
+  * Rollback an update ( this is for when update got error, we can rollback to previous version)
+  ```kubectl rollout undo deployments/deployment_name```
 
   3. Let's make an example to get the hang of basic kubernetes: creating a simple node.js application using docker container. Located all needed files in folder ```hellonode```
     * Create a ```server.js``` file
