@@ -84,7 +84,7 @@ Check list of pods after scaling down ```kubectl get pods -o wide```. this confi
   3. Let's make an example to get the hang of basic kubernetes: creating a simple node.js application using docker container. Located all needed files in folder ```hellonode```
     * Create a ```server.js``` file
 
-    ```
+    ```js
     var http = require('http');
     var handleRequest = function(request, response) {
       console.log('Received request for URL: ' + request.url);
